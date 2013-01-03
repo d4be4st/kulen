@@ -1,13 +1,11 @@
 class PageParser
 
   def self.parse(slug)
-    page = {}
-    File.open(PAGES_URL + slug + PAGES_FORMAT).each do |line|
-      line = line.strip()
-      metadata = /\/\s*(.+):\s*(.+)/.match(line)
-      page[metadata[1].to_sym] = metadata[2] if metadata.present?
-    end
+    page = YAML.load_file(PAGES_URL + slug + PAGES_META)
+    page = page.symbolize_keys
     page[:page] = slug
+    page[:page_url] = PAGES_PATH + slug + PAGES_INDEX 
+
     page
   end
   

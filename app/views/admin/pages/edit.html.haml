@@ -1,1 +1,7 @@
-= @page
+= simple_form_for @page, url: admin_update_page_path(@page.page), html: { class: 'form-horizontal' }, method: 'put' do |f|
+  .form-inputs
+    = f.input :title
+    = f.input :layout
+    = f.input :content, as: :text
+  .form-actions
+    = f.button :submit, 'Update', class: 'btn-primary'

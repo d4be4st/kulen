@@ -22,5 +22,6 @@ gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'simple_form'
+gem 'active_attr'
 
 gem 'debugger'
