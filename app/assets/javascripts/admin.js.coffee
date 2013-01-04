@@ -13,4 +13,9 @@
 #= require jquery
 #= require jquery_ujs
 #= require bootstrap
-#= require edit_pages
+#= require jqueryFileTree
+#= require_self
+
+$(document).ready ->
+  $('#fileTree').fileTree { root: 'app/views/pages/', script: 'pages_content' }, (file) ->
+    alert(file);

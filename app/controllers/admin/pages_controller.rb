@@ -26,4 +26,10 @@ class Admin::PagesController < ApplicationController
     File.open(PAGES_URL+ params[:url] + PAGES_INDEX, 'w') {|f| f.write(content) }
     redirect_to action: :index
   end
+
+  def content
+    @parent = params[:dir]
+    @dir = JqueryFileTree.new(@parent).dirs
+    render layout: false
+  end
 end

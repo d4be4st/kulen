@@ -1,0 +1,9 @@
+%ul.jqueryFileTree{:style => "display: none;"}
+  - @dir.each do |dir|
+    %li.directory.collapsed
+      %a{:href => "#", :rel => "#{@parent+dir}/"}
+        = dir
+  / - @dir[1].each do |file|
+  /   %li{:class => "file ext_#{File.extname(file)[1..-1]}"}
+  /     %a{:href => "#", :rel => @parent+file}
+  /       = file

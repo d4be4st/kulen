@@ -1,3 +1,8 @@
+= content_for :head do
+  = javascript_include_tag "http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js"
+  = javascript_include_tag "edit_pages"
+
+
 = simple_form_for @page, url: admin_update_page_path(@page.url), html: { class: 'form-horizontal' }, method: 'put' do |f|
   .form-inputs
     %fieldset

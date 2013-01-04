@@ -11,6 +11,7 @@
  *= require_self
  *= require bootstrap
  *= require bootstrap-responsive
+ *= require jqueryFileTree
  */
 
 .content{
@@ -20,4 +21,15 @@
   margin-left: 180px;
   width: 1024px;
   height: 720px;
+}
+
+.demo{
+  background-color:#FFFFFF;
+  border-color:#BBBBBB #FFFFFF #FFFFFF #BBBBBB;
+  border-style:solid;
+  border-width:1px;
+  height:400px;
+  overflow:scroll;
+  padding:5px;
+  width:200px;
 }
