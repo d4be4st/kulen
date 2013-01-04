@@ -1,10 +1,11 @@
 class PageParser
 
-  def self.parse(slug)
-    page = YAML.load_file(PAGES_URL + slug + PAGES_META)
+  def self.parse(url)
+    page = YAML.load_file(PAGES_URL + url + PAGES_META)
     page = page.symbolize_keys
-    page[:page] = slug
-    page[:page_url] = PAGES_PATH + slug + PAGES_INDEX 
+    page[:page] = PAGES_PATH + url + PAGES_INDEX_RENDER
+    page[:index] = PAGES_PATH + url + PAGES_INDEX
+    page[:url] = url
 
     page
   end

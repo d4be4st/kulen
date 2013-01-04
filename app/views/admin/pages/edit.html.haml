@@ -1,7 +1,18 @@
-= simple_form_for @page, url: admin_update_page_path(@page.page), html: { class: 'form-horizontal' }, method: 'put' do |f|
+= simple_form_for @page, url: admin_update_page_path(@page.url), html: { class: 'form-horizontal' }, method: 'put' do |f|
   .form-inputs
-    = f.input :title
-    = f.input :layout
-    = f.input :content, as: :text
-  .form-actions
+    %fieldset
+      %legend= @page.page_breadcrumbs
+      = f.input :layout, collection: layouts
+    %fieldset
+      %legend SEO
+      = f.input :seo_title
+      = f.input :seo_description
+      = f.input :seo_keywords
+    = f.hidden_field :content
+    %fieldset
+      %legend CONTENT
+      #editor{content: "#{@page.content}"}
+
+  .form-actions{style: 'margin-top: 760px;'}
+    = link_to 'Back', admin_pages_path, class: 'btn btn-danger'
     = f.button :submit, 'Update', class: 'btn-primary'

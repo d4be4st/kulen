@@ -1,2 +1,4 @@
-title: Hello5
-layout: drugilayout
+layout: application
+seo_title: Ovo je drugi title
+seo_description: Ovo je neki description
+seo_keywords: seo description keywords bla

@@ -3,10 +3,11 @@ Kulen::Application.routes.draw do
 
   namespace :admin do 
     get 'pages' => 'pages#index'
-    get 'pages/*slug' => 'pages#edit', as: 'edit_page'
-    put 'pages/*slug' => 'pages#update', as: 'update_page'
+    get 'pages/*url' => 'pages#edit', as: 'edit_page'
+    put 'pages/*url' => 'pages#update', as: 'update_page'
+    root to: 'pages#index'
   end
 
-  get '/*slug' => 'pages#pages'
+  get '/*url' => 'pages#pages'
 
 end
