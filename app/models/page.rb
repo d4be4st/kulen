@@ -7,6 +7,7 @@ class Page
   attribute :page
   attribute :index
   attribute :url
+  attribute :path
 
   attribute :seo_title
   attribute :seo_description

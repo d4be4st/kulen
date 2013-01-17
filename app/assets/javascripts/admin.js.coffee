@@ -16,6 +16,23 @@
 #= require jqueryFileTree
 #= require_self
 
+window.setEditor = ->
+  editor = ace.edit("editor")
+  editor.getSession().setMode("ace/mode/html")
+  content = editor.container.attributes['content'].nodeValue
+  editor.setValue(content, -1)
+
+
+  $(':submit').click ->
+    newContent = editor.getValue()
+    $('#page_content').val(newContent)
+
 $(document).ready ->
-  $('#fileTree').fileTree { root: 'app/views/pages/', script: 'pages_content' }, (file) ->
-    alert(file);
+  $('#fileTree').fileTree { root: 'app/views/pages/', script: '/admin/pages_content' }, (file) ->
+    url = file.substring(16,file.length - 15);
+    $.ajax(
+      url: '/admin/pages/'+ url,
+      success: (data) ->
+        $('#main-content').html(data)
+        setEditor()
+    )

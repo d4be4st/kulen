@@ -14,22 +14,47 @@ class Admin::PagesController < ApplicationController
   def edit
     @page = Page.new(PageParser.parse(params[:url]) )
     @page.content = File.read(PAGES_URL+ params[:url]+PAGES_INDEX)
+    render partial: '/admin/pages/edit_form'
+  end
+
+  def new
+    @page = Page.new
+  end
+
+  def create
+    dir = params[:page].delete :path
+    Dir.mkdir(PAGES_URL + dir)
+    page_edit(PAGES_URL + dir, params[:page])
+
+    respond_to do |format|
+      format.html { redirect_to action: :index }
+      format.js { @page = Page.new(params[:page]) }
+    end
   end
 
   def update
-    content = params[:page].delete :content
+    page_edit(PAGES_URL + params[:url], params[:page])
 
-    page_yaml = params[:page].to_yaml
-    page_yaml.gsub!("--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\n", "")
-    File.open(PAGES_URL+ params[:url] + PAGES_META, 'w') {|f| f.write(page_yaml)}
-
-    File.open(PAGES_URL+ params[:url] + PAGES_INDEX, 'w') {|f| f.write(content) }
-    redirect_to action: :index
+    respond_to do |format|
+      format.html { redirect_to action: :index }
+      format.js
+    end
   end
 
   def content
     @parent = params[:dir]
-    @dir = JqueryFileTree.new(@parent).dirs
+    @dir = JqueryFileTree.new(@parent).content
+    @admin_dir = '/admin/pages/'
     render layout: false
+  end
+
+  private
+  def page_edit(page_url, params)
+    content = params.delete :content
+    meta = params.to_yaml
+    meta.gsub!("--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\n", "")
+    File.open(File.join(page_url,PAGES_META), 'w') {|f| f.write(meta)}
+
+    File.open(File.join(page_url,PAGES_INDEX), 'w') {|f| f.write(content) }
   end
 end

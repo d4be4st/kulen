@@ -1,9 +1,4 @@
-= content_for :head do
-  = javascript_include_tag "http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js"
-  = javascript_include_tag "edit_pages"
-
-
-= simple_form_for @page, url: admin_update_page_path(@page.url), html: { class: 'form-horizontal' }, method: 'put' do |f|
+= simple_form_for @page, url: admin_update_page_path(@page.url), html: { class: 'form-horizontal' }, method: 'put', remote: true do |f|
   .form-inputs
     %fieldset
       %legend= @page.page_breadcrumbs
@@ -19,5 +14,5 @@
       #editor{content: "#{@page.content}"}
 
   .form-actions{style: 'margin-top: 760px;'}
-    = link_to 'Back', admin_pages_path, class: 'btn btn-danger'
     = f.button :submit, 'Update', class: 'btn-primary'
+

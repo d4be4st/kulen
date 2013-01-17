@@ -1,5 +1,8 @@
-- @pages.each do |page|
-  %p= link_to page, admin_edit_page_path(page)
-
-%h2 File tree
-#fileTree.demo
+.container-flud
+  .row-fluid
+    .span3
+      %h2 Pages
+      #fileTree.demo
+      = link_to 'New Page', admin_new_page_path, class: "btn btn-primary", remote: true
+    .span9
+      #main-content

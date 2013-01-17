@@ -1,0 +1,19 @@
+= simple_form_for @page, url: admin_create_page_path, html: { class: 'form-horizontal' }, method: 'post', remote: true do |f|
+  .form-inputs
+    %fieldset
+      %legend New Page
+      = f.input :path
+      = f.input :layout, collection: layouts
+    %fieldset
+      %legend SEO
+      = f.input :seo_title
+      = f.input :seo_description
+      = f.input :seo_keywords
+    = f.hidden_field :content
+    %fieldset
+      %legend CONTENT
+      #editor{content: "#{@page.content}"}
+
+  .form-actions{style: 'margin-top: 760px;'}
+    = f.button :submit, 'Create', class: 'btn-primary'
+

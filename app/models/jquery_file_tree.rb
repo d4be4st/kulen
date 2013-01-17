@@ -24,7 +24,7 @@ class JqueryFileTree
     @files = []
     if File.exists?(@path)
       Dir.entries(@path).each do |file|
-        if File.file?(File.join(@path, file))
+        if File.file?(File.join(@path, file)) && file!="meta.yml"
           @files << file
         end
       end
