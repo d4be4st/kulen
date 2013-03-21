@@ -2,7 +2,11 @@
   .row-fluid
     .span3
       %h2 Pages
-      #fileTree.demo
+      .pages
+        - @pages.each do |page|
+          .page{data:{page: page}}
+            =link_to page, admin_edit_page_path(page), remote: true
+            =link_to 'X', admin_destroy_page_path(page), method: :delete, data: { confirm: 'Are you sure?' }, class: 'pull-right', remote: true
       = link_to 'New Page', admin_new_page_path, class: "btn btn-primary", remote: true
     .span9
       #main-content

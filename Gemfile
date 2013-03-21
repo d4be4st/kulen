@@ -14,6 +14,9 @@ end
 group :development do
   gem 'quiet_assets'
   gem 'awesome_print'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'debugger'
 end
 
 gem 'thin'

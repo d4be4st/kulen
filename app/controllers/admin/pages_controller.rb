@@ -10,11 +10,10 @@ class Admin::PagesController < ApplicationController
     end
     @pages.sort!
   end
-  
+
   def edit
     @page = Page.new(PageParser.parse(params[:url]) )
     @page.content = File.read(PAGES_URL+ params[:url]+PAGES_INDEX)
-    render partial: '/admin/pages/edit_form'
   end
 
   def new
@@ -41,11 +40,9 @@ class Admin::PagesController < ApplicationController
     end
   end
 
-  def content
-    @parent = params[:dir]
-    @dir = JqueryFileTree.new(@parent).content
-    @admin_dir = '/admin/pages/'
-    render layout: false
+  def destroy
+    @page = params[:url]
+    FileUtils.rm_rf(PAGES_URL + @page)
   end
 
   private
